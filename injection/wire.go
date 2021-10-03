@@ -1,15 +1,15 @@
 package injection
 
 import (
+	"github.com/daffashafwan/deteksip/handler"
+	"github.com/daffashafwan/deteksip/repository"
+	"github.com/daffashafwan/deteksip/service"
 	"github.com/google/wire"
 	"github.com/jinzhu/gorm"
-	"github.com/teten-nugraha/golang-crud/handler"
-	"github.com/teten-nugraha/golang-crud/repository"
-	"github.com/teten-nugraha/golang-crud/service"
 )
 
-func initMahasiswaAPI(db *gorm.DB) handler.MahasiswaAPI {
-	wire.Build(repository.ProviderMahasiswaRepository, service.ProviderMahasiswaService, handler.ProviderMahasiswaAPI)
+func initMahasiswaAPI(db *gorm.DB) handler.UserAPI {
+	wire.Build(repository.ProviderUserRepository, service.ProviderUserService, handler.ProviderUserAPI)
 
-	return handler.MahasiswaAPI{}
+	return handler.UserAPI{}
 }

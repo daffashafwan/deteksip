@@ -26,7 +26,7 @@ Sebelum itu pastikan MySQL sudah running dan buat sebuah database dengan nama **
 Berikut langkah-langkah untuk running repo ini
 
 ```
-$ git clone https://github.com/teten-nugraha/golang-crud.git
+$ git clone https://github.com/daffashafwan/deteksip.git
 $ go mod download
 $ go run main.go
 ```

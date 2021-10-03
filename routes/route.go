@@ -1,10 +1,10 @@
 package routes
 
 import (
+	db2 "github.com/daffashafwan/deteksip/db"
+	"github.com/daffashafwan/deteksip/injection"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	db2 "github.com/teten-nugraha/golang-crud/db"
-	"github.com/teten-nugraha/golang-crud/injection"
 )
 
 func Init() *echo.Echo {
@@ -24,7 +24,7 @@ func Init() *echo.Echo {
 		Level: 5,
 	}))
 
-	MahasiswaRoute(routes, mahasiswaAPI)
+	UserRoute(routes, mahasiswaAPI)
 
 	return routes
 }

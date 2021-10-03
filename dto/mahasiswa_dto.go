@@ -1,11 +1,11 @@
 package dto
 
-type MahasiswaDTO struct {
+type UserDTO struct {
 
-	Nim    string `json:"nim" validate:"required"`
+	Username    string `json:"username" validate:"required"`
 	Nama   string `json:"nama" validate:"required"`
-	Phone  string `json:"phone" validate:"required"`
-	Alamat string `json:"alamat" validate:"required"`
+	Status  string `json:"status" validate:"required"`
+	Password string `json:"password" validate:"required"`
 	Email  string `json:"email" validate:"required"`
 
 }

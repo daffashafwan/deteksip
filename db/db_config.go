@@ -3,11 +3,11 @@ package db
 import (
 	"os"
 
+	"github.com/daffashafwan/deteksip/domain"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
-	"github.com/teten-nugraha/golang-crud/domain"
 )
 
 func InitDB() *gorm.DB {
@@ -33,7 +33,7 @@ func InitDB() *gorm.DB {
 func migrateDDL(db *gorm.DB) {
 	// migrasi domain ke tabel di mysql
 
-	db.AutoMigrate(&domain.Mahasiswa{})
+	db.AutoMigrate(&domain.User{})
 }
 
 func processENV() {

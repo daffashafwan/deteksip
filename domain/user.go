@@ -1,10 +1,10 @@
 package domain
 
-type Mahasiswa struct {
+type User struct {
 	ID     uint64 `gorm:"primaryKey;autoIncrement:true"`
-	Nim    string
+	Username    string
 	Nama   string
-	Phone  string
-	Alamat string
+	Status  string
+	Password string
 	Email  string
 }

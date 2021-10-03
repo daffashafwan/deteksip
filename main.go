@@ -1,7 +1,7 @@
 package main
 
 import (
-	routes2 "github.com/teten-nugraha/golang-crud/routes"
+	routes2 "github.com/daffashafwan/deteksip/routes"
 )
 
 func main() {
