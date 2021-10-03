@@ -49,7 +49,6 @@ func (m *UserRepository) FindByUsername(username string) domain.User {
 	var user domain.User
 
 	m.DB.Where("username =? ", username).Find(&user)
-
 	return user
 }
 

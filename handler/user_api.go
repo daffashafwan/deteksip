@@ -2,12 +2,12 @@ package handler
 
 import (
 	"net/http"
-
 	"github.com/daffashafwan/deteksip/dto"
 	_ "github.com/daffashafwan/deteksip/dto"
 	"github.com/daffashafwan/deteksip/service"
 	"github.com/labstack/echo"
 	_ "github.com/labstack/echo"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type UserAPI struct {
@@ -30,13 +30,17 @@ func (m *UserAPI) FindAll(e echo.Context) error {
 	return SuccessResponse(e, http.StatusOK, users)
 }
 
+func HashPassword(password string) (string) {
+    bytes, _ := bcrypt.GenerateFromPassword([]byte(password), 14)
+    return string(bytes)
+}
+
 func (m *UserAPI) SaveOrUpdate(e echo.Context) error {
 	var newDto dto.UserDTO
-
 	newDto.Username = e.FormValue("Username")
 	newDto.Nama = e.FormValue("Nama")
 	newDto.Status = e.FormValue("Status")
-	newDto.Password = e.FormValue("Password")
+	newDto.Password = HashPassword(e.FormValue("Password"))
 	newDto.Email = e.FormValue("Email")
 
 	res, err := m.UserService.SaveOrUpdate(newDto)
@@ -51,7 +55,6 @@ func (m *UserAPI) FindByUsername(e echo.Context) error {
 	username := e.Param("username")
 
 	user := m.UserService.FindByUsername(username)
-
 	return SuccessResponse(e, http.StatusOK, user)
 }
 

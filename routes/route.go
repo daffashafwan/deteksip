@@ -11,6 +11,7 @@ func Init() *echo.Echo {
 	dbConfig := db2.InitDB()
 
 	mahasiswaAPI := injection.InitMahasiswaAPI(dbConfig)
+	tipesoalAPI := injection.InitMahasiswaAPI(dbConfig)
 
 	routes := echo.New()
 

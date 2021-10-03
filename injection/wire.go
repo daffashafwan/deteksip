@@ -13,3 +13,9 @@ func initMahasiswaAPI(db *gorm.DB) handler.UserAPI {
 
 	return handler.UserAPI{}
 }
+
+func initTipeSoalAPI(db *gorm.DB) handler.TipeSoalAPI {
+	wire.Build(repository.ProviderTipeSoalRepository, service.ProviderTipeSoalService, handler.ProviderTipeSoalAPI)
+
+	return handler.TipeSoalAPI{}
+}

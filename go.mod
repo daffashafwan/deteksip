@@ -11,5 +11,6 @@ require (
 	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/sirupsen/logrus v1.7.0
 	github.com/valyala/fasttemplate v1.2.1 // indirect
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 
 )
