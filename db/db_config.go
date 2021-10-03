@@ -34,6 +34,7 @@ func migrateDDL(db *gorm.DB) {
 	// migrasi domain ke tabel di mysql
 
 	db.AutoMigrate(&domain.User{})
+	db.AutoMigrate(&domain.TipeSoal{})
 }
 
 func processENV() {

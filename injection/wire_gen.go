@@ -14,14 +14,14 @@ import (
 
 // Injectors from wire.go:
 
-func initMahasiswaAPI(db *gorm.DB) handler.UserAPI {
+func InitMahasiswaAPI(db *gorm.DB) handler.UserAPI {
 	userRepository := repository.ProviderUserRepository(db)
 	userService := service.ProviderUserService(userRepository)
 	userAPI := handler.ProviderUserAPI(userService)
 	return userAPI
 }
 
-func initTipeSoalAPI(db *gorm.DB) handler.TipeSoalAPI {
+func InitTipeSoalAPI(db *gorm.DB) handler.TipeSoalAPI {
 	tipeSoalRepository := repository.ProviderTipeSoalRepository(db)
 	tipeSoalService := service.ProviderTipeSoalService(tipeSoalRepository)
 	tipeSoalAPI := handler.ProviderTipeSoalAPI(tipeSoalService)

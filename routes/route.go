@@ -10,8 +10,8 @@ import (
 func Init() *echo.Echo {
 	dbConfig := db2.InitDB()
 
-	mahasiswaAPI := injection.initMahasiswaAPI(dbConfig)
-	tipesoalAPI := injection.initTipeSoalAPI(dbConfig)
+	mahasiswaAPI := injection.InitMahasiswaAPI(dbConfig)
+	tipesoalAPI := injection.InitTipeSoalAPI(dbConfig)
 
 	routes := echo.New()
 
