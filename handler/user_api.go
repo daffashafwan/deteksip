@@ -69,3 +69,5 @@ func (m *UserAPI) DeleteUser(e echo.Context) error {
 
 	return SuccessResponse(e, http.StatusOK, "Delete Success")
 }
+
+

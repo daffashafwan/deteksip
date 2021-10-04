@@ -9,6 +9,9 @@ import (
 func ToSoalDomain(dto dto.SoalDTO) domain.Soal {
 	return domain.Soal{
 		Soal:    dto.Soal,
+		TipeSoalID: dto.TipeSoalID,
+		UserID: dto.UserID,
+
 	}
 }
 
@@ -26,6 +29,8 @@ func ToSoalDomainList(dtos []dto.SoalDTO) []domain.Soal {
 func ToSoalDTO(soal domain.Soal) dto.SoalDTO {
 	return dto.SoalDTO{
 		Soal:    soal.Soal,
+		TipeSoalID: soal.TipeSoalID,
+		UserID: soal.UserID,
 	}
 }
 

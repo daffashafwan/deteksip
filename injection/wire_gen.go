@@ -34,3 +34,10 @@ func InitAuthAPI(db *gorm.DB) handler.AuthAPI {
 	authAPI := handler.ProviderAuthAPI(authService)
 	return authAPI
 }
+
+func InitSoalAPI(db *gorm.DB) handler.SoalAPI {
+	soalRepository := repository.ProviderSoalRepository(db)
+	soalService := service.ProviderSoalService(soalRepository)
+	soalAPI := handler.ProviderSoalAPI(soalService)
+	return soalAPI
+}

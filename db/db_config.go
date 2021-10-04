@@ -35,6 +35,7 @@ func migrateDDL(db *gorm.DB) {
 
 	db.AutoMigrate(&domain.User{})
 	db.AutoMigrate(&domain.TipeSoal{})
+	db.AutoMigrate(&domain.Soal{})
 }
 
 func processENV() {

@@ -9,6 +9,7 @@ type SoalRepositoryContract interface {
 	SaveOrUpdate(soal domain.Soal) (domain.Soal, error)
 	FindAll() []domain.Soal
 	FindByID(id string) domain.Soal
+	FindByTipeSoalID(id string) domain.Soal
 	DeleteSoal(soal domain.Soal) error
 }
 
@@ -40,6 +41,14 @@ func (m *SoalRepository) FindByID(id string) domain.Soal {
 	var soal domain.Soal
 
 	m.DB.Where("id =? ", id).Find(&soal)
+
+	return soal
+}
+
+func (m *SoalRepository) FindByTipeSoalID(id string) domain.Soal {
+	var soal domain.Soal
+
+	m.DB.Where("tipe_soal_id =? ", id).Find(&soal)
 
 	return soal
 }

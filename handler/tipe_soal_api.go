@@ -6,6 +6,7 @@ import (
 	_ "github.com/daffashafwan/deteksip/dto"
 	"github.com/daffashafwan/deteksip/service"
 	"github.com/labstack/echo"
+	"github.com/dgrijalva/jwt-go"
 	_ "github.com/labstack/echo"
 )
 
@@ -15,6 +16,13 @@ type TipeSoalAPI struct {
 
 func ProviderTipeSoalAPI(k service.TipeSoalService) TipeSoalAPI {
 	return TipeSoalAPI{TipeSoalService: k}
+}
+
+func (m *TipeSoalAPI) private(c echo.Context) error {
+    user := c.Get("user").(*jwt.Token)
+    claims := user.Claims.(jwt.MapClaims)
+    name := claims["name"].(string)
+    return c.String(http.StatusOK, "Welcome "+name+"!")
 }
 
 // implementasi
