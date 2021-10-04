@@ -29,6 +29,7 @@ func ToUserDomainList(dtos []dto.UserDTO) []domain.User {
 // From DTO to Domain
 func ToUserDTO(user domain.User) dto.UserDTO {
 	return dto.UserDTO{
+		ID: user.ID,
 		Username:    user.Username,
 		Nama:   user.Nama,
 		Status:  user.Status,

@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
-
+	"time"
+	"github.com/dgrijalva/jwt-go"
 	//"github.com/daffashafwan/deteksip/dto"
 	_ "github.com/daffashafwan/deteksip/dto"
 	"github.com/daffashafwan/deteksip/service"
@@ -12,12 +12,23 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type AuthAPI struct {
-	UserService service.UserService
+const secret = "secret"
+
+type jwtCustomClaims struct {
+	Name  string `json:"name"`
+	UUID  uint64 `json:"uuid"`
+	Admin bool   `json:"admin"`
+	jwt.StandardClaims
 }
 
-func ProviderAuthAPI(k service.UserService) UserAPI {
-	return UserAPI{UserService: k}
+var pointer = &jwtCustomClaims{}
+
+type AuthAPI struct {
+	AuthService service.AuthService
+}
+
+func ProviderAuthAPI(k service.AuthService) AuthAPI {
+	return AuthAPI{AuthService: k}
 }
 
 func CheckPasswordHash(password, hash string) bool {
@@ -25,18 +36,32 @@ func CheckPasswordHash(password, hash string) bool {
     return err == nil
 }
 
-func (m *UserAPI) CheckLogin(e echo.Context) error {
+func (m *AuthAPI) Login(e echo.Context) error {
 	username := e.FormValue("Username")
-	//password := e.FormValue("Password")
+	password := e.FormValue("Password")
 
-	user := m.UserService.FindByUsername(username)
-	fmt.Println(user)
+	user := m.AuthService.Login(username, password)
+	if !CheckPasswordHash(password, user.Password) {
+		return echo.ErrUnauthorized
+	}
 
-	return SuccessResponse(e, http.StatusOK, user)
+	claims := &jwtCustomClaims{
+		Name:  user.Nama,
+		UUID:  user.ID,
+		Admin: true,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
+		},
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	t, err := token.SignedString([]byte(secret))
+	if err != nil {
+		return err
+	}
+
+	return e.JSON(http.StatusOK, map[string]string{
+		"token": t,
+	})
+	//return SuccessResponse(e, http.StatusOK, user)	
 }
-
-// func CheckLogin(username, password string) (bool, error){
-// 	return 
-// }
-
 

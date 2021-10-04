@@ -58,6 +58,7 @@ func (m *UserAPI) FindByUsername(e echo.Context) error {
 	return SuccessResponse(e, http.StatusOK, user)
 }
 
+
 func (m *UserAPI) DeleteUser(e echo.Context) error {
 	id := e.Param("id")
 

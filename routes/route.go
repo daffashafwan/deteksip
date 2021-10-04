@@ -12,6 +12,7 @@ func Init() *echo.Echo {
 
 	mahasiswaAPI := injection.InitMahasiswaAPI(dbConfig)
 	tipesoalAPI := injection.InitTipeSoalAPI(dbConfig)
+	authAPI := injection.InitAuthAPI(dbConfig)
 
 	routes := echo.New()
 
@@ -27,5 +28,6 @@ func Init() *echo.Echo {
 
 	UserRoute(routes, mahasiswaAPI)
 	TipeSoalRoute(routes, tipesoalAPI)
+	AuthRoute(routes, authAPI)
 	return routes
 }

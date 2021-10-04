@@ -52,6 +52,7 @@ func (m *UserRepository) FindByUsername(username string) domain.User {
 	return user
 }
 
+
 func (m *UserRepository) DeleteUser(user domain.User) error {
 	if err := m.DB.Delete(&user).Error; err != nil {
 		return err

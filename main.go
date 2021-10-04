@@ -8,5 +8,5 @@ func main() {
 
 	routes := routes2.Init()
 
-	routes.Logger.Fatal(routes.Start(":9999"))
+	routes.Logger.Fatal(routes.Start(":1223"))
 }
