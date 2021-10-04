@@ -19,3 +19,9 @@ func initTipeSoalAPI(db *gorm.DB) handler.TipeSoalAPI {
 
 	return handler.TipeSoalAPI{}
 }
+
+func initAuthAPI(db *gorm.DB) handler.AuthAPI {
+	wire.Build(repository.ProviderUserRepository, service.ProviderUserService, handler.ProviderAuthAPI)
+
+	return handler.AuthAPI{}
+}
