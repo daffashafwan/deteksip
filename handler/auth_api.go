@@ -38,10 +38,13 @@ func (m *AuthAPI) Login(e echo.Context) error {
 	claims["name"] = user.Nama
 	claims["admin"] = true
 	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
-	if user.Username == "user" {
-		secret = "user"
-	}else{
-		secret = "admin"
+	switch user.Username{
+		case "user":
+			secret = "user"
+		case "admin":
+			secret = "admin"
+		case "anak":
+			secret = "anak"
 	}
 	t, err := token.SignedString([]byte(secret))	
 	if err != nil {
