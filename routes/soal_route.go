@@ -19,6 +19,8 @@ func SoalRoute(routes *echo.Echo, api handler.SoalAPI) {
 	tps := routes.Group("/soal")
 	{
 		tps.GET("/list", api.FindAll, IsLoggedInUser)
+		//tps.POST("/upload", api.Upload)
+		tps.GET("/vision", api.InitVision)
 		tps.GET("/FindByTipeSoalID/:tipesoal", api.FindByTipeSoalID, IsLoggedInAnak, IsLoggedInUser)
 		tps.POST("/save", api.SaveOrUpdate, IsLoggedInUser)
 	}

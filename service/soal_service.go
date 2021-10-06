@@ -43,7 +43,7 @@ func (m *SoalService) FindAll() []dto.SoalDTO {
 	return mapper.ToSoalDTOList(datas)
 }
 
-func (m *SoalService) FindByTipeSoalID(id string) (dto.SoalDTO){
+func (m *SoalService) FindByTipeSoalID(id string) dto.SoalDTO {
 	datas := m.SoalRepository.FindByTipeSoalID(id)
 	return mapper.ToSoalDTO(datas)
 }
