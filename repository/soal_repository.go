@@ -29,26 +29,24 @@ func (m *SoalRepository) SaveOrUpdate(soal domain.Soal) (domain.Soal, error) {
 	return soal, nil
 }
 
-func (m *SoalRepository) FindAll() []domain.Soal {
+func (m *SoalRepository) FindAll(user_id string) []domain.Soal {
 	var soals []domain.Soal
 
-	m.DB.Find(&soals)
+	m.DB.Where("user_id =?", user_id).Find(&soals)
 
 	return soals
 }
 
 func (m *SoalRepository) FindByID(id string) domain.Soal {
 	var soal domain.Soal
-
 	m.DB.Where("id =? ", id).Find(&soal)
-
 	return soal
 }
 
-func (m *SoalRepository) FindByTipeSoalID(id string) domain.Soal {
+func (m *SoalRepository) FindByTipeSoalID(id string, user_id string) domain.Soal {
 	var soal domain.Soal
 
-	m.DB.Where("tipe_soal_id =? ", id).Find(&soal)
+	m.DB.Where("tipe_soal_id =? ", id).Where("user_id =? ", user_id).Find(&soal)
 
 	return soal
 }

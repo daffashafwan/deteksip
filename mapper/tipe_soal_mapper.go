@@ -3,6 +3,7 @@ package mapper
 import (
 	"github.com/daffashafwan/deteksip/domain"
 	"github.com/daffashafwan/deteksip/dto"
+	"strconv"
 )
 
 // From DTO to Domain
@@ -25,6 +26,7 @@ func ToTipeSoalDomainList(dtos []dto.TipeSoalDTO) []domain.TipeSoal {
 // From DTO to Domain
 func ToTipeSoalDTO(tipesoal domain.TipeSoal) dto.TipeSoalDTO {
 	return dto.TipeSoalDTO{
+		ID: strconv.Itoa(int(tipesoal.ID)), 
 		Tipe_soal:    tipesoal.Tipe_soal,
 	}
 }

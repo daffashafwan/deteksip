@@ -7,6 +7,18 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
+var IsLoggedInUser = middleware.JWTWithConfig(middleware.JWTConfig{
+	SigningKey: []byte("user"),
+})
+
+var IsLoggedInAnak = middleware.JWTWithConfig(middleware.JWTConfig{
+	SigningKey: []byte("anak"),
+})
+
+var IsLoggedIn = middleware.JWTWithConfig(middleware.JWTConfig{
+	SigningKey: []byte("admin"),
+})
+
 func Init() *echo.Echo {
 	dbConfig := db2.InitDB()
 
@@ -27,9 +39,12 @@ func Init() *echo.Echo {
 		Level: 5,
 	}))
 
+	routes.Use(middleware.CORS())
+
 	UserRoute(routes, mahasiswaAPI)
 	TipeSoalRoute(routes, tipesoalAPI)
 	AuthRoute(routes, authAPI)
 	SoalRoute(routes, soalAPI)
+	SoalAnakRoute(routes, soalAPI)
 	return routes
 }

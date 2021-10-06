@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-
 	"github.com/daffashafwan/deteksip/domain"
 	"github.com/daffashafwan/deteksip/dto"
 	"github.com/daffashafwan/deteksip/mapper"
@@ -13,6 +12,7 @@ type SoalRepositoryContract interface {
 	SaveOrUpdate(dto dto.SoalDTO) (dto.SoalDTO, error)
 	FindAll() []dto.SoalDTO
 	FindByTipeSoalID(id string)
+	FindByID(id string)
 	DeleteSoal(id string) error
 }
 
@@ -36,16 +36,21 @@ func (m *SoalService) SaveOrUpdate(dto dto.SoalDTO) (dto.SoalDTO, error) {
 	return mapper.ToSoalDTO(soal), err
 }
 
-func (m *SoalService) FindAll() []dto.SoalDTO {
+func (m *SoalService) FindAll(user_id string) []dto.SoalDTO {
 
-	datas := m.SoalRepository.FindAll()
+	datas := m.SoalRepository.FindAll(user_id)
 
 	return mapper.ToSoalDTOList(datas)
 }
 
-func (m *SoalService) FindByTipeSoalID(id string) dto.SoalDTO {
-	datas := m.SoalRepository.FindByTipeSoalID(id)
+func (m *SoalService) FindByTipeSoalID(id string,user_id string) dto.SoalDTO {
+	datas := m.SoalRepository.FindByTipeSoalID(id, user_id)
 	return mapper.ToSoalDTO(datas)
+}
+
+func (m *SoalService) FindByID(id string) dto.SoalDTO {
+	soal := m.SoalRepository.FindByID(id)
+	return mapper.ToSoalDTO(soal)
 }
 
 func (m *SoalService) DeleteSoal(id string) error {

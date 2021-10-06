@@ -28,6 +28,7 @@ func ToSoalDomainList(dtos []dto.SoalDTO) []domain.Soal {
 // From DTO to Domain
 func ToSoalDTO(soal domain.Soal) dto.SoalDTO {
 	return dto.SoalDTO{
+		ID: soal.ID,
 		Soal:    soal.Soal,
 		TipeSoalID: soal.TipeSoalID,
 		UserID: soal.UserID,
