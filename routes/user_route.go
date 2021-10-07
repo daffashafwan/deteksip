@@ -12,6 +12,6 @@ func UserRoute(routes *echo.Echo, api handler.UserAPI) {
 		mhs.GET("/list", api.FindAll, IsLoggedIn)
 		mhs.POST("/save", api.SaveOrUpdate, IsLoggedIn)
 		mhs.GET("/FindByUsername/:username", api.FindByUsername, IsLoggedIn)
-		mhs.DELETE("/delete/:id", api.FindByUsername, IsLoggedIn)
+		mhs.DELETE("/delete", api.DeleteUser, IsLoggedIn)
 	}
 }

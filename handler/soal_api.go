@@ -20,7 +20,6 @@ import (
 	"github.com/daffashafwan/deteksip/service"
 	"github.com/labstack/echo"
 	_ "github.com/labstack/echo"
-	"gocv.io/x/gocv"
 	"google.golang.org/api/option"
 	speechpb "google.golang.org/genproto/googleapis/cloud/speech/v1"
 )
@@ -74,32 +73,32 @@ func (m *SoalAPI) Base64toJpg(e echo.Context) error {
 	return SuccessResponse(e, http.StatusOK, dat)
 }
 
-func (m *SoalAPI) InitWebcam(e echo.Context) error {
-	deviceID := "0bda:57d5"
-	saveFile := "tesfile"
+// func (m *SoalAPI) InitWebcam(e echo.Context) error {
+// 	deviceID := "0bda:57d5"
+// 	saveFile := "tesfile"
 
-	webcam, err := gocv.OpenVideoCapture(deviceID)
-	if err != nil {
-		fmt.Printf("Error opening video capture device: %v\n", deviceID)
-		return ErrorResponse(e, http.StatusInternalServerError, err.Error())
-	}
-	defer webcam.Close()
+// 	webcam, err := gocv.OpenVideoCapture(deviceID)
+// 	if err != nil {
+// 		fmt.Printf("Error opening video capture device: %v\n", deviceID)
+// 		return ErrorResponse(e, http.StatusInternalServerError, err.Error())
+// 	}
+// 	defer webcam.Close()
 
-	img := gocv.NewMat()
-	defer img.Close()
+// 	img := gocv.NewMat()
+// 	defer img.Close()
 
-	if ok := webcam.Read(&img); !ok {
-		fmt.Printf("cannot read device %v\n", deviceID)
-		return ErrorResponse(e, http.StatusInternalServerError, err.Error())
-	}
-	if img.Empty() {
-		fmt.Printf("no image on device %v\n", deviceID)
-		return ErrorResponse(e, http.StatusInternalServerError, err.Error())
-	}
+// 	if ok := webcam.Read(&img); !ok {
+// 		fmt.Printf("cannot read device %v\n", deviceID)
+// 		return ErrorResponse(e, http.StatusInternalServerError, err.Error())
+// 	}
+// 	if img.Empty() {
+// 		fmt.Printf("no image on device %v\n", deviceID)
+// 		return ErrorResponse(e, http.StatusInternalServerError, err.Error())
+// 	}
 
-	gocv.IMWrite(saveFile, img)
-	return SuccessResponse(e, http.StatusOK, "mantul")
-}
+// 	gocv.IMWrite(saveFile, img)
+// 	return SuccessResponse(e, http.StatusOK, "mantul")
+// }
 
 func (m *SoalAPI) SaveOrUpdate(e echo.Context) error {
 	var newDto dto.SoalDTO
@@ -133,7 +132,9 @@ func (m *SoalAPI) FindByID(e echo.Context) error {
 }
 
 func (m *SoalAPI) DeleteSoal(e echo.Context) error {
-	id := e.Param("id")
+	id := e.FormValue("id")
+	fmt.Println("tes")
+	fmt.Println(id)
 	err := m.SoalService.DeleteSoal(id)
 	if err != nil {
 		return ErrorResponse(e, http.StatusInternalServerError, err.Error())
@@ -145,7 +146,7 @@ func (m *SoalAPI) DeleteSoal(e echo.Context) error {
 func (m *SoalAPI) InitSpeech(e echo.Context) error {
 	ctx := context.Background()
 
-	client, err := speech.NewClient(ctx, option.WithCredentialsFile("/home/daffashafwan/Downloads/avian-direction-321000-cc1b082385c5.json"))
+	client, err := speech.NewClient(ctx, option.WithCredentialsFile("../avian-direction-321000-cc1b082385c5.json"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -222,7 +223,7 @@ func (m *SoalAPI) InitVision(e echo.Context, files string) error {
 	ctx := context.Background()
 
 	// Creates a client.
-	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("/home/daffashafwan/Downloads/avian-direction-321000-cc1b082385c5.json"))
+	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("../avian-direction-321000-cc1b082385c5.json"))
 	if err != nil {
 		return ErrorResponse(e, http.StatusInternalServerError, err.Error())
 	}

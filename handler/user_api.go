@@ -60,7 +60,7 @@ func (m *UserAPI) FindByUsername(e echo.Context) error {
 
 
 func (m *UserAPI) DeleteUser(e echo.Context) error {
-	id := e.Param("id")
+	id := e.FormValue("id")
 
 	err := m.UserService.DeleteUser(id)
 	if err != nil {

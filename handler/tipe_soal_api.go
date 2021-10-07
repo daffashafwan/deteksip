@@ -52,7 +52,7 @@ func (m *TipeSoalAPI) SaveOrUpdate(e echo.Context) error {
 
 
 func (m *TipeSoalAPI) DeleteTipeSoal(e echo.Context) error {
-	id := e.Param("id")
+	id := e.FormValue("id")
 
 	err := m.TipeSoalService.DeleteTipeSoal(id)
 	if err != nil {

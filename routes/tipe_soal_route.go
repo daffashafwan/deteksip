@@ -13,6 +13,6 @@ func TipeSoalRoute(routes *echo.Echo, api handler.TipeSoalAPI) {
 	{
 		tps.GET("/list", api.FindAll, IsLoggedIn)
 		tps.POST("/save", api.SaveOrUpdate, IsLoggedIn)
-		tps.DELETE("/delete/:id", api.SaveOrUpdate, IsLoggedIn)
+		tps.DELETE("/delete", api.DeleteTipeSoal, IsLoggedIn)
 	}
 }
